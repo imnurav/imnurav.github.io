@@ -1,5 +1,4 @@
 "use client";
-
 import { GraduationCap, Calendar, MapPin, Award, CheckCircle2 } from "lucide-react";
 import AnimatedContainer from "./AnimatedContainer";
 import SectionHeading from "./SectionHeading";
@@ -39,7 +38,7 @@ export default function Education() {
                   <motion.div
                     whileHover={{ y: -4 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="relative p-7 sm:p-8 rounded-3xl border border-border/50 bg-background/60 backdrop-blur-sm hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300 group overflow-hidden"
+                    className="relative p-7 sm:p-8 rounded-3xl border border-border bg-card hover:bg-secondary/20 transition-all duration-200 group overflow-hidden shadow-card hover:shadow-card-hover"
                   >
                     {/* Top accent bar */}
                     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-600 via-indigo-600 to-emerald-600 opacity-60 group-hover:opacity-100 transition-opacity" />
@@ -50,7 +49,7 @@ export default function Education() {
                     <div className="relative">
                       {/* Header */}
                       <div className="flex flex-wrap items-start gap-4 mb-6">
-                        <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600/20 to-indigo-600/20 border border-violet-500/20 flex items-center justify-center shadow-lg">
+                        <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center shadow-card">
                           <GraduationCap size={24} className="text-violet-500" />
                         </div>
 

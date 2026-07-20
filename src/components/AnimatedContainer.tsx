@@ -1,5 +1,4 @@
 "use client";
-
 import { motion, type Variants, type HTMLMotionProps } from "framer-motion";
 import { forwardRef } from "react";
 
@@ -78,15 +77,15 @@ const AnimatedContainer = forwardRef<HTMLDivElement, AnimatedContainerProps>(
     const adjustedVariants: Variants =
       delay > 0
         ? {
-            hidden: variants.hidden,
-            visible: {
-              ...(variants.visible as object),
-              transition: {
-                ...((variants.visible as { transition?: object }).transition ?? {}),
-                delay,
-              },
+          hidden: variants.hidden,
+          visible: {
+            ...(variants.visible as object),
+            transition: {
+              ...((variants.visible as { transition?: object }).transition ?? {}),
+              delay,
             },
-          }
+          },
+        }
         : variants;
 
     return (

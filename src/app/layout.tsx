@@ -1,13 +1,13 @@
-import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
-import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Inter, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import {
-  SITE_NAME,
   SITE_DESCRIPTION,
-  SITE_URL,
   SITE_AUTHOR,
+  SITE_NAME,
+  SITE_URL,
 } from "@/lib/constants";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],

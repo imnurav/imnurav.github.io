@@ -1,5 +1,4 @@
 "use client";
-
 import AnimatedContainer, { StaggerContainer, StaggerItem } from "./AnimatedContainer";
 import { User, TrendingUp, Zap, Search } from "lucide-react";
 import SectionHeading from "./SectionHeading";
@@ -71,31 +70,47 @@ export default function About() {
               </div>
             </div>
 
-            {/* Tech philosophy */}
+            {/* Tech philosophy — terminal card */}
             <motion.div
               whileHover={{ scale: 1.01 }}
-              className="p-5 rounded-2xl border border-border/50 bg-secondary/30 backdrop-blur-sm"
+              className="rounded-2xl overflow-hidden border border-slate-700/60 shadow-card"
             >
-              <p className="text-sm font-mono text-muted-foreground leading-relaxed">
-                <span className="text-violet-500">const</span>{" "}
-                <span className="text-indigo-400">engineer</span>{" "}
-                <span className="text-muted-foreground/60">=</span>{" "}
-                {"{"}{" "}
-                <br />
-                &nbsp;&nbsp;<span className="text-sky-400">passion</span>
-                {":"}{" "}
-                <span className="text-emerald-400">{'"Backend Systems"'}</span>
-                {","} <br />
-                &nbsp;&nbsp;<span className="text-sky-400">craft</span>
-                {":"}{" "}
-                <span className="text-emerald-400">{'"Clean Code"'}</span>
-                {","} <br />
-                &nbsp;&nbsp;<span className="text-sky-400">goal</span>
-                {":"}{" "}
-                <span className="text-emerald-400">{'"Ship fast, iterate faster"'}</span>
-                <br />
-                {"};"}
-              </p>
+              {/* Terminal chrome bar */}
+              <div className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-800 border-b border-slate-700/60">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                <span className="ml-2 text-[10px] text-slate-500 font-mono">engineer.ts</span>
+              </div>
+              {/* Code body — always dark */}
+              <div className="bg-slate-950 px-5 py-4">
+                <p className="text-sm font-mono leading-7 select-none">
+                  <span className="text-violet-400">const</span>{" "}
+                  <span className="text-sky-300">engineer</span>{" "}
+                  <span className="text-slate-500">=</span>{" "}
+                  <span className="text-slate-400">{"{"}</span>
+                  <br />
+                  <span className="text-slate-600">&nbsp;&nbsp;</span>
+                  <span className="text-blue-300">passion</span>
+                  <span className="text-slate-500">:</span>{" "}
+                  <span className="text-amber-300">{'"Backend Systems"'}</span>
+                  <span className="text-slate-500">,</span>
+                  <br />
+                  <span className="text-slate-600">&nbsp;&nbsp;</span>
+                  <span className="text-blue-300">craft</span>
+                  <span className="text-slate-500">:</span>{" "}
+                  <span className="text-amber-300">{'"Clean Code"'}</span>
+                  <span className="text-slate-500">,</span>
+                  <br />
+                  <span className="text-slate-600">&nbsp;&nbsp;</span>
+                  <span className="text-blue-300">goal</span>
+                  <span className="text-slate-500">:</span>{" "}
+                  <span className="text-amber-300">{'"Ship fast, iterate faster"'}</span>
+                  <br />
+                  <span className="text-slate-400">{"}"}</span>
+                  <span className="text-slate-500">;</span>
+                </p>
+              </div>
             </motion.div>
           </AnimatedContainer>
 
@@ -110,9 +125,9 @@ export default function About() {
                     whileHover={{ scale: 1.03, y: -4 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     className={cn(
-                      "relative flex flex-col gap-3 p-6 rounded-2xl border backdrop-blur-sm overflow-hidden group",
-                      "bg-background/50 border-border/50 hover:border-border",
-                      `shadow-xl ${color.glow}`
+                      "relative flex flex-col gap-3 p-6 rounded-2xl border backdrop-blur-sm overflow-hidden group cursor-default",
+                      "bg-card border-border hover:border-border/80 shadow-card hover:shadow-card-hover",
+                      "transition-all duration-250"
                     )}
                   >
                     {/* Background glow on hover */}

@@ -206,14 +206,14 @@ export default function Hero() {
                   </div>
                   <div className="flex flex-col">
                     <span className="text-pink-500">const <span className="text-blue-400">developer</span> <span className="text-zinc-300">=</span> <span className="text-zinc-300">{`{`}</span></span>
-                    <span className="text-zinc-300 ml-4">name: <span className="text-amber-400">"{heroData.name}"</span>,</span>
-                    <span className="text-zinc-300 ml-4">role: <span className="text-amber-400">"Backend & Full Stack Engineer"</span>,</span>
+                    <span className="text-zinc-300 ml-4">name: <span className="text-amber-400">&quot;{heroData.name}&quot;</span>,</span>
+                    <span className="text-zinc-300 ml-4">role: <span className="text-amber-400">&quot;Backend &amp; Full Stack Engineer&quot;</span>,</span>
                     <span className="text-zinc-300 ml-4">skills: <span className="text-zinc-300">[</span></span>
-                    <span className="ml-8"><span className="text-amber-400">"NestJS"</span><span className="text-zinc-300">, </span><span className="text-amber-400">"Next.js"</span><span className="text-zinc-300">,</span></span>
-                    <span className="ml-8"><span className="text-amber-400">"Microservices"</span><span className="text-zinc-300">, </span><span className="text-amber-400">"AWS"</span></span>
+                    <span className="ml-8"><span className="text-amber-400">&quot;NestJS&quot;</span><span className="text-zinc-300">, </span><span className="text-amber-400">&quot;Next.js&quot;</span><span className="text-zinc-300">,</span></span>
+                    <span className="ml-8"><span className="text-amber-400">&quot;Microservices&quot;</span><span className="text-zinc-300">, </span><span className="text-amber-400">&quot;AWS&quot;</span></span>
                     <span className="text-zinc-300 ml-4">],</span>
-                    <span className="text-zinc-300 ml-4">focus: <span className="text-amber-400">"High-Traffic Architecture"</span>,</span>
-                    <span className="text-zinc-300 ml-4">status: <span className="text-emerald-400">"Shipping to Production"</span></span>
+                    <span className="text-zinc-300 ml-4">focus: <span className="text-amber-400">&quot;High-Traffic Architecture&quot;</span>,</span>
+                    <span className="text-zinc-300 ml-4">status: <span className="text-emerald-400">&quot;Shipping to Production&quot;</span></span>
                     <span className="text-zinc-300">{`}`};</span>
                   </div>
                 </div>

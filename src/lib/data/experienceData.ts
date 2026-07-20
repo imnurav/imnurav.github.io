@@ -1,7 +1,7 @@
 export const experienceData = [
   {
     company: "Khan Global Studies Pvt. Ltd.",
-    companyUrl: "#",
+    companyUrl: "https://khanglobalstudies.com/",
     location: "Noida, Uttar Pradesh",
     logo: "https://khanglobalstudies.com/Images/logos/logo.avif",
     roles: [
@@ -17,7 +17,15 @@ export const experienceData = [
           "Led Next.js platform rebuild with 90% server-side rendering (SSR) — improved SEO rankings by 40%, organic traffic by 40%, and page load times by 30%.",
           "Implemented microservices architecture for Test Series and Course Management using Minima.js, Knex.js, and Objection.js, reducing API response times by 40%.",
         ],
-        tech: ["NestJS", "Node.js", "BullMQ", "Next.js", "Microservices", "AWS"],
+        tech: [
+          "NestJS",
+          "Node.js",
+          "BullMQ",
+          "Redis",
+          "Next.js",
+          "AWS",
+          "Microservices",
+        ],
       },
       {
         title: "Junior Software Engineer",
@@ -28,7 +36,14 @@ export const experienceData = [
           "Engineered highly optimized data fetching layers and RESTful API integrations, significantly reducing screen load times for low-bandwidth devices.",
           "Contributed to core frontend architecture using Next.js and Tailwind CSS, delivering highly responsive user interfaces and increasing user engagement.",
         ],
-        tech: ["React Native", "Next.js", "Tailwind CSS", "REST APIs", "HLS"],
+        tech: [
+          "React Native",
+          "TypeScript",
+          "Next.js",
+          "Tailwind CSS",
+          "REST APIs",
+          "HLS",
+        ],
       },
       {
         title: "Software Engineer Intern",

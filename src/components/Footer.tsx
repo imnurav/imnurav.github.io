@@ -1,9 +1,8 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
-import { FOOTER_SOCIALS } from "@/lib/constants";
-import { SITE_AUTHOR } from "@/lib/constants";
-import { ArrowUp, Heart } from "lucide-react";
+import { FOOTER_SOCIALS, SITE_AUTHOR } from "@/lib/constants";
+import { ArrowUp, Terminal } from "lucide-react";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function Footer() {
   const [showTop, setShowTop] = useState(false);
@@ -17,55 +16,62 @@ export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="relative border-t border-border bg-background">
+    <footer className="relative bg-background pt-20 pb-12 border-t border-border overflow-hidden">
       {/* Top fade */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-primary/30 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          {/* Logo & copyright */}
-          <div className="flex flex-col items-center sm:items-start gap-2">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center">
-                <span className="text-white font-bold text-xs">V</span>
-              </div>
-              <span className="font-bold text-sm">
-                {SITE_AUTHOR}
-                <span className="text-gradient">.</span>
-              </span>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+        {/* Logo & branding */}
+        <div className="flex flex-col items-center gap-4 mb-8">
+          <div
+            className="flex items-center gap-2 group cursor-pointer"
+            onClick={scrollToTop}
+          >
+            <div className="w-10 h-10 rounded-xl border border-primary/30 bg-primary/10 flex items-center justify-center shadow-lg shadow-primary/10 transition-all duration-300 group-hover:bg-primary">
+              <Terminal
+                size={20}
+                className="text-primary group-hover:text-primary-foreground transition-colors"
+              />
             </div>
-            <p className="text-xs text-muted-foreground flex items-center gap-1">
-              Crafted with{" "}
-              <Heart size={11} className="text-rose-500 fill-rose-500" /> using
-              Next.js & TypeScript
-            </p>
-            <p className="text-xs text-muted-foreground/60">
-              © {new Date().getFullYear()} {SITE_AUTHOR}. All rights reserved.
-            </p>
           </div>
-
-          {/* Socials */}
-          <div className="flex items-center gap-2">
-            {FOOTER_SOCIALS.map(({ icon: Icon, href, label }) => (
-              <motion.a
-                key={label}
-                href={href}
-                target={label !== "Email" ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-9 h-9 rounded-xl border border-border/60 bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border hover:bg-secondary transition-all duration-200"
-                aria-label={label}
-              >
-                <Icon size={16} className="w-4 h-4" />
-              </motion.a>
-            ))}
+          <div>
+            <h3 className="font-bold text-xl tracking-tight mb-2">
+              {SITE_AUTHOR}
+              {/* <span className="text-primary">.</span> */}
+            </h3>
+            <p className="text-base sm:text-lg font-medium text-muted-foreground max-w-md mx-auto leading-relaxed">
+              Software Engineer crafting beautiful, dynamic, and
+              high-performance digital experiences.
+            </p>
           </div>
         </div>
 
-        {/* Bottom row */}
-        <div className="mt-8 pt-6 border-t border-border/30 flex flex-wrap justify-center gap-x-6 gap-y-2">
-          {["About", "Experience", "Skills", "Projects", "Education", "Contact"].map((item) => (
+        {/* Socials */}
+        <div className="flex items-center justify-center gap-4 mb-10">
+          {FOOTER_SOCIALS.map(({ icon: Icon, href, label }) => (
+            <a
+              key={label}
+              href={href}
+              target={label !== "Email" ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-10 h-10 rounded-full border border-border/60 bg-secondary/30 text-muted-foreground hover:text-foreground hover:border-border hover:bg-secondary transition-all duration-200"
+              aria-label={label}
+            >
+              <Icon size={18} className="w-4 h-4" />
+            </a>
+          ))}
+        </div>
+
+        {/* Quick Links */}
+        <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-12">
+          {[
+            "About",
+            "Experience",
+            "Skills",
+            "Projects",
+            "Education",
+            "Contact",
+          ].map((item) => (
             <button
               key={item}
               onClick={() => {
@@ -73,30 +79,39 @@ export default function Footer() {
                   .getElementById(item.toLowerCase())
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
             >
               {item}
             </button>
           ))}
         </div>
+
+        {/* Copyright */}
+        <p className="text-xs font-medium text-muted-foreground/50">
+          © {new Date().getFullYear()} {SITE_AUTHOR}. All rights reserved.
+        </p>
       </div>
 
       {/* Back to top */}
-      <AnimatePresence>
-        {showTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 16 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            onClick={scrollToTop}
-            className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 text-white flex items-center justify-center shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50 hover:scale-110 transition-all duration-200"
-            aria-label="Back to top"
-          >
-            <ArrowUp size={18} />
-          </motion.button>
+      <div
+        className={cn(
+          "fixed bottom-6 right-6 z-50 transition-all duration-300 ease-out",
+          showTop
+            ? "opacity-100 translate-y-0 scale-100"
+            : "opacity-0 translate-y-4 scale-90 pointer-events-none",
         )}
-      </AnimatePresence>
+      >
+        <button
+          onClick={scrollToTop}
+          className="w-10 h-10 rounded-xl border border-primary/30 bg-primary/10 text-primary flex items-center justify-center shadow-lg hover:bg-primary hover:text-primary-foreground hover:scale-110 active:scale-90 transition-all duration-300 group"
+          aria-label="Back to top"
+        >
+          <ArrowUp
+            size={18}
+            className="group-hover:-translate-y-1 transition-transform"
+          />
+        </button>
+      </div>
     </footer>
   );
 }

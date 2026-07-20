@@ -1,5 +1,5 @@
-import { Mail, Phone, Code2, Layers, Cpu, Coffee, Server } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/Icons";
+import { Mail, Phone, Code2, Layers, Server } from "lucide-react";
+import { GithubIcon, LinkedinIcon, NpmIcon, WhatsappIcon } from "@/components/Icons";
 
 export const SITE_URL = "https://varunkumar.dev";
 export const SITE_NAME = "Varun Kumar — Software Engineer";
@@ -30,45 +30,28 @@ export const SECTIONS = [
   "contact",
 ] as const;
 
-export const PROJECTS_COLOR_MAP: Record<string, {
-  badge: string;
-  border: string;
-  pill: string;
-  gradient: string;
-  icon: string;
-  pkgBg: string;
-}> = {
-  violet: {
-    badge: "bg-violet-500/10 border-violet-500/20 text-violet-600 dark:text-violet-400",
-    border: "hover:border-violet-500/20",
-    pill: "bg-secondary/70 border-border text-foreground/70",
-    gradient: "from-violet-600 to-indigo-600",
-    icon: "text-violet-500",
-    pkgBg: "bg-violet-500/8 border-violet-500/20",
-  },
-  sky: {
-    badge: "bg-sky-500/10 border-sky-500/20 text-sky-600 dark:text-sky-400",
-    border: "hover:border-sky-500/20",
-    pill: "bg-secondary/70 border-border text-foreground/70",
-    gradient: "from-sky-600 to-cyan-600",
-    icon: "text-sky-500",
-    pkgBg: "bg-sky-500/8 border-sky-500/20",
-  },
-  emerald: {
-    badge: "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400",
-    border: "hover:border-emerald-500/20",
-    pill: "bg-secondary/70 border-border text-foreground/70",
-    gradient: "from-emerald-600 to-teal-600",
-    icon: "text-emerald-500",
-    pkgBg: "bg-emerald-500/8 border-emerald-500/20",
-  },
+const primaryProjectStyle = {
+  badge: "bg-primary/10 border-primary/20 text-primary dark:text-primary",
+  border: "hover:border-primary/30",
+  pill: "bg-secondary/70 border-border text-muted-foreground",
+  gradient: "from-primary/90 to-primary/70",
+  icon: "text-primary",
+  pkgBg: "bg-primary/5 border-primary/10",
+};
+
+export const PROJECTS_COLOR_MAP: Record<string, typeof primaryProjectStyle> = {
+  violet: primaryProjectStyle,
+  sky: primaryProjectStyle,
+  emerald: primaryProjectStyle,
+  primary: primaryProjectStyle,
 };
 
 export const CONTACT_COLOR_MAP: Record<string, string> = {
-  violet: "bg-violet-500/10 border-violet-500/20 text-violet-500",
-  indigo: "bg-indigo-500/10 border-indigo-500/20 text-indigo-500",
-  sky: "bg-sky-500/10 border-sky-500/20 text-sky-500",
-  emerald: "bg-emerald-500/10 border-emerald-500/20 text-emerald-500",
+  violet: "bg-primary/5 border-primary/20 text-primary",
+  indigo: "bg-primary/5 border-primary/20 text-primary",
+  sky: "bg-primary/5 border-primary/20 text-primary",
+  emerald: "bg-primary/5 border-primary/20 text-primary",
+  primary: "bg-primary/5 border-primary/20 text-primary",
 };
 
 export const CONTACT_ITEMS = [
@@ -106,9 +89,11 @@ export const CONTACT_SOCIAL_ITEMS = [
 ];
 
 export const FOOTER_SOCIALS = [
-  { label: "GitHub", href: GITHUB_URL, icon: GithubIcon, color: "hover:text-violet-500" },
-  { label: "LinkedIn", href: LINKEDIN_URL, icon: LinkedinIcon, color: "hover:text-sky-500" },
-  { label: "Email", href: `mailto:${SITE_EMAIL}`, icon: Mail, color: "hover:text-rose-500" },
+  { label: "GitHub", href: GITHUB_URL, icon: GithubIcon, color: "hover:text-primary" },
+  { label: "LinkedIn", href: LINKEDIN_URL, icon: LinkedinIcon, color: "hover:text-primary" },
+  { label: "Email", href: `mailto:${SITE_EMAIL}`, icon: Mail, color: "hover:text-primary" },
+  { label: "npm", href: "https://www.npmjs.com/~nurav", icon: NpmIcon, color: "hover:text-primary" },
+  { label: "WhatsApp", href: "https://wa.me/919873538514", icon: WhatsappIcon, color: "hover:text-primary" },
 ];
 
 export const HERO_SOCIAL_ICONS = {

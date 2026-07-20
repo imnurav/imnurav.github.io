@@ -1,7 +1,6 @@
 "use client";
 import { GITHUB_URL, LINKEDIN_URL, SITE_EMAIL } from "@/lib/constants";
 import { useEffect, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -40,6 +39,37 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
   const { theme, setTheme } = useTheme();
+  
+  const [isRendered, setIsRendered] = useState(open);
+  const [isVisible, setIsVisible] = useState(open);
+
+  // Derive isRendered state from open prop to avoid setting state in effect
+  if (open && !isRendered) {
+    setIsRendered(true);
+  }
+  // Derive isVisible false from open prop during render
+  if (!open && isVisible) {
+    setIsVisible(false);
+  }
+
+  useEffect(() => {
+    let raf: number;
+    let timer: NodeJS.Timeout;
+
+    if (open) {
+      // Small delay to allow DOM to render before applying visible state
+      raf = requestAnimationFrame(() => {
+        setIsVisible(true);
+      });
+    } else {
+      timer = setTimeout(() => setIsRendered(false), 200);
+    }
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(timer);
+    };
+  }, [open, isVisible]);
 
   const navigateTo = useCallback(
     (id: string) => {
@@ -214,141 +244,137 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
 
   let itemIndex = 0;
 
+  if (!isRendered) return null;
+
   return (
-    <AnimatePresence>
-      {open && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[998] bg-background/60 backdrop-blur-md"
-            onClick={onClose}
-          />
+    <>
+      {/* Backdrop */}
+      <div
+        className={cn(
+          "fixed inset-0 z-[998] bg-background/60 backdrop-blur-md transition-opacity duration-200",
+          isVisible ? "opacity-100" : "opacity-0"
+        )}
+        onClick={onClose}
+      />
 
-          {/* Dialog */}
-          <div className="fixed inset-0 z-[999] flex items-start justify-center pt-[15vh] px-4">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full max-w-lg bg-card backdrop-blur-xl border border-border rounded-2xl shadow-card overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
+      {/* Dialog */}
+      <div className="fixed inset-0 z-[999] flex items-start justify-center pt-[15vh] px-4 pointer-events-none">
+        <div
+          className={cn(
+            "w-full max-w-lg bg-card backdrop-blur-xl border border-border rounded-2xl shadow-card overflow-hidden transition-all duration-200 ease-out pointer-events-auto",
+            isVisible ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-5"
+          )}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex items-center gap-3 border-b border-border/50 p-3">
+            <label
+              htmlFor="command-menu-search"
+              className="group flex min-h-12 flex-1 items-center gap-3 rounded-xl border border-border/70 bg-secondary/45 px-3 shadow-inner shadow-background/20 transition-colors focus-within:border-border focus-within:bg-background/85 focus-within:shadow-sm"
             >
-              <div className="flex items-center gap-3 border-b border-border/50 p-3">
-                <label
-                  htmlFor="command-menu-search"
-                  className="group flex min-h-12 flex-1 items-center gap-3 rounded-xl border border-border/70 bg-secondary/45 px-3 shadow-inner shadow-background/20 transition-colors focus-within:border-border focus-within:bg-background/85 focus-within:shadow-sm"
-                >
-                  <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-background/70 text-muted-foreground transition-colors group-focus-within:bg-primary/10 group-focus-within:text-primary">
-                    <Search size={15} />
-                  </span>
-                  <input
-                    id="command-menu-search"
-                    autoFocus
-                    value={query}
-                    onChange={(e) => {
-                      setQuery(e.target.value);
-                      setSelected(0);
-                    }}
-                    placeholder="Type a command..."
-                    className="h-12 min-w-0 flex-1 rounded-none border-0 bg-transparent text-[15px] font-medium text-foreground caret-primary outline-none placeholder:text-muted-foreground/45 focus:!outline-none focus-visible:!outline-none focus-visible:!ring-0 focus-visible:!shadow-none"
-                  />
-                </label>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  aria-label="Close command menu"
-                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-border/60 bg-secondary/60 text-muted-foreground transition-colors hover:border-border hover:bg-secondary hover:text-foreground focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
-                >
-                  <X size={15} />
-                </button>
-              </div>
-
-              {/* Commands list */}
-              <div className="max-h-[60vh] overflow-y-auto py-2">
-                {filtered.length === 0 ? (
-                  <div className="py-12 text-center text-sm text-muted-foreground">
-                    No results for &quot;{query}&quot;
-                  </div>
-                ) : (
-                  groups.map((group) => {
-                    const groupItems = filtered.filter((c) => c.group === group);
-                    return (
-                      <div key={group} className="mb-1">
-                        <div className="px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/50">
-                          {group}
-                        </div>
-                        {groupItems.map((item) => {
-                          const idx = itemIndex++;
-                          const isSelected = idx === selected;
-                          return (
-                            <button
-                              key={item.id}
-                              onClick={item.action}
-                              onMouseEnter={() => setSelected(idx)}
-                              className={cn(
-                                "w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors",
-                                isSelected
-                                  ? "bg-secondary text-foreground"
-                                  : "text-foreground hover:bg-secondary/50"
-                              )}
-                            >
-                              <div
-                                className={cn(
-                                  "w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-muted-foreground",
-                                  isSelected &&
-                                  "bg-primary/10 text-primary border border-primary/20"
-                                )}
-                              >
-                                {item.icon}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="text-sm font-medium">
-                                  {item.label}
-                                </div>
-                                {item.description && (
-                                  <div className="text-xs text-muted-foreground truncate">
-                                    {item.description}
-                                  </div>
-                                )}
-                              </div>
-                              {item.shortcut && (
-                                <kbd className="hidden sm:inline-flex items-center gap-0.5 text-[10px] text-muted-foreground border border-border/60 rounded px-1.5 py-0.5 bg-background">
-                                  {item.shortcut}
-                                </kbd>
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    );
-                  })
-                )}
-              </div>
-
-              {/* Footer */}
-              <div className="border-t border-border/40 px-4 py-2.5 flex items-center gap-4 text-[10px] text-muted-foreground/50">
-                <span className="flex items-center gap-1">
-                  <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">↑↓</kbd>
-                  Navigate
-                </span>
-                <span className="flex items-center gap-1">
-                  <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">↵</kbd>
-                  Select
-                </span>
-                <span className="flex items-center gap-1">
-                  <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">Esc</kbd>
-                  Close
-                </span>
-              </div>
-            </motion.div>
+              <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-background/70 text-muted-foreground transition-colors group-focus-within:bg-primary/10 group-focus-within:text-primary">
+                <Search size={15} />
+              </span>
+              <input
+                id="command-menu-search"
+                autoFocus
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelected(0);
+                }}
+                placeholder="Type a command..."
+                className="h-12 min-w-0 flex-1 rounded-none border-0 bg-transparent text-[15px] font-medium text-foreground caret-primary outline-none placeholder:text-muted-foreground/45 focus:!outline-none focus-visible:!outline-none focus-visible:!ring-0 focus-visible:!shadow-none"
+              />
+            </label>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close command menu"
+              className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-border/60 bg-secondary/60 text-muted-foreground transition-colors hover:border-border hover:bg-secondary hover:text-foreground focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+            >
+              <X size={15} />
+            </button>
           </div>
-        </>
-      )}
-    </AnimatePresence>
+
+          {/* Commands list */}
+          <div className="max-h-[60vh] overflow-y-auto py-2">
+            {filtered.length === 0 ? (
+              <div className="py-12 text-center text-sm text-muted-foreground">
+                No results for &quot;{query}&quot;
+              </div>
+            ) : (
+              groups.map((group) => {
+                const groupItems = filtered.filter((c) => c.group === group);
+                return (
+                  <div key={group} className="mb-1">
+                    <div className="px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/50">
+                      {group}
+                    </div>
+                    {groupItems.map((item) => {
+                      const idx = itemIndex++;
+                      const isSelected = idx === selected;
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={item.action}
+                          onMouseEnter={() => setSelected(idx)}
+                          className={cn(
+                            "w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors",
+                            isSelected
+                              ? "bg-secondary text-foreground"
+                              : "text-foreground hover:bg-secondary/50"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-muted-foreground",
+                              isSelected &&
+                              "bg-primary/10 text-primary border border-primary/20"
+                            )}
+                          >
+                            {item.icon}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-medium">
+                              {item.label}
+                            </div>
+                            {item.description && (
+                              <div className="text-xs text-muted-foreground truncate">
+                                {item.description}
+                              </div>
+                            )}
+                          </div>
+                          {item.shortcut && (
+                            <kbd className="hidden sm:inline-flex items-center gap-0.5 text-[10px] text-muted-foreground border border-border/60 rounded px-1.5 py-0.5 bg-background">
+                              {item.shortcut}
+                            </kbd>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                );
+              })
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="border-t border-border/40 px-4 py-2.5 flex items-center gap-4 text-[10px] text-muted-foreground/50">
+            <span className="flex items-center gap-1">
+              <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">↑↓</kbd>
+              Navigate
+            </span>
+            <span className="flex items-center gap-1">
+              <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">↵</kbd>
+              Select
+            </span>
+            <span className="flex items-center gap-1">
+              <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">Esc</kbd>
+              Close
+            </span>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

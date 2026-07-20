@@ -4,6 +4,26 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
+  
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
 }
 
 @layer base {
@@ -19,7 +39,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 25% 10%;
 
-    --primary: 258 90% 58%;          /* violet #7C3AED */
+    --primary: 221 83% 53%;          /* blue-600 */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 16% 94%;        /* very light slate */
@@ -28,15 +48,15 @@
     --muted: 220 16% 96%;
     --muted-foreground: 220 12% 50%;
 
-    --accent: 258 90% 96%;           /* faint violet tint */
-    --accent-foreground: 258 80% 40%;
+    --accent: 214 100% 97%;          /* faint blue tint */
+    --accent-foreground: 221 83% 53%;
 
     --destructive: 0 78% 56%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 16% 90%;           /* soft border */
     --input: 220 16% 90%;
-    --ring: 258 90% 58%;
+    --ring: 221 83% 53%;
     --radius: 0.75rem;
   }
 
@@ -52,7 +72,7 @@
     --popover: 222 18% 10%;
     --popover-foreground: 210 18% 94%;
 
-    --primary: 258 80% 64%;          /* lighter violet for dark bg */
+    --primary: 217 91% 60%;          /* blue-500 */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 222 16% 16%;        /* subtle secondary surface */
@@ -61,15 +81,15 @@
     --muted: 222 16% 14%;
     --muted-foreground: 218 12% 52%;
 
-    --accent: 258 30% 18%;           /* dark violet tint */
-    --accent-foreground: 258 70% 76%;
+    --accent: 217 32% 17%;           /* dark blue tint */
+    --accent-foreground: 217 91% 60%;
 
     --destructive: 0 68% 44%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 222 16% 18%;           /* subtle dark border */
     --input: 222 16% 16%;
-    --ring: 258 80% 64%;
+    --ring: 217 91% 60%;
   }
 }
 
@@ -199,11 +219,11 @@ h1, h2, h3, h4, h5, h6 {
 
   /* ── Glow — subtle ── */
   .glow {
-    box-shadow: 0 0 24px -6px hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 16px -6px hsl(var(--primary) / 0.15);
   }
 
   .glow-sm {
-    box-shadow: 0 0 12px -4px hsl(var(--primary) / 0.25);
+    box-shadow: 0 0 8px -4px hsl(var(--primary) / 0.1);
   }
 
   /* ── Backgrounds ── */
@@ -312,3 +332,90 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ── Lightweight Native Animations ── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fade-down {
+  animation: fade-down 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-left {
+  animation: slide-left 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-right {
+  animation: slide-right 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Stagger delay utilities */
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* In-view utility helper (used by AnimatedContainer) */
+.opacity-0-init {
+  opacity: 0;
+}
+
+/* Stagger Container Logic */
+.stagger-active > * {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.stagger-active > *:nth-child(1) { animation-delay: 50ms; }
+.stagger-active > *:nth-child(2) { animation-delay: 100ms; }
+.stagger-active > *:nth-child(3) { animation-delay: 150ms; }
+.stagger-active > *:nth-child(4) { animation-delay: 200ms; }
+.stagger-active > *:nth-child(5) { animation-delay: 250ms; }
+.stagger-active > *:nth-child(6) { animation-delay: 300ms; }
+.stagger-active > *:nth-child(7) { animation-delay: 350ms; }
+.stagger-active > *:nth-child(8) { animation-delay: 400ms; }
+.stagger-active > *:nth-child(9) { animation-delay: 450ms; }
+.stagger-active > *:nth-child(10) { animation-delay: 500ms; }
+.stagger-active > *:nth-child(11) { animation-delay: 550ms; }
+.stagger-active > *:nth-child(12) { animation-delay: 600ms; }
+.stagger-active > *:nth-child(n+13) { animation-delay: 650ms; }

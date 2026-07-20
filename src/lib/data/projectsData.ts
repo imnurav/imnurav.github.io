@@ -4,7 +4,7 @@ export const projectsData = [
     title: "PlayerKit",
     tagline: "Comprehensive Video Player Monorepo",
     description:
-      "A complete suite for building modern video experiences. Beyond just HLS, it provides a headless playback engine, ready-to-use React components, and a fully-themed UI library that gives you complete control over the viewing experience.",
+      "A complete suite for building modern video experiences. With native support for HLS, YouTube, and MP4 out of the box, it provides a headless playback engine, ready-to-use React components, and a fully-themed UI library that gives you complete control over the viewing experience.",
     type: "NPM Monorepo / Open Source",
     featured: true,
     status: "Published",
@@ -16,10 +16,11 @@ export const projectsData = [
     tech: [
       "TypeScript",
       "HLS.js",
+      "YouTube API",
+      "MP4",
       "React",
       "Rollup",
       "CSS",
-      "Media Source Extensions",
     ],
     packages: [
       {
@@ -59,28 +60,5 @@ export const projectsData = [
       "Zero-config setup with sensible defaults",
     ],
     color: "violet",
-  },
-  {
-    id: "shrinika",
-    title: "Shrinika Dermacare",
-    tagline: "Full Stack Healthcare Platform",
-    description:
-      "A complete clinic management and patient booking system for a dermatology clinic. Features online appointment scheduling, patient records, doctor availability management, and automated confirmation emails.",
-    type: "Client Project",
-    featured: true,
-    status: "Live",
-    links: {
-      github: null,
-      npm: null,
-      live: "https://shrinkadermacare.com",
-    },
-    tech: ["NestJS", "Next.js", "PostgreSQL", "TypeORM", "TypeScript"],
-    features: [
-      "Real-time appointment slot management",
-      "Automated booking confirmations",
-      "Doctor dashboard for schedule management",
-      "Secure patient history tracking",
-    ],
-    color: "sky",
   },
 ];

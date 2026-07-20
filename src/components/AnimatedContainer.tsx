@@ -1,112 +1,80 @@
 "use client";
-import { motion, type Variants, type HTMLMotionProps } from "framer-motion";
-import { forwardRef } from "react";
-
-const defaultVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-const scaleVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.92 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-const slideLeftVariants: Variants = {
-  hidden: { opacity: 0, x: -32 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-const slideRightVariants: Variants = {
-  hidden: { opacity: 0, x: 32 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-const staggerContainerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
-};
+import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export const variantMap = {
-  fadeUp: defaultVariants,
-  scale: scaleVariants,
-  slideLeft: slideLeftVariants,
-  slideRight: slideRightVariants,
-  stagger: staggerContainerVariants,
+  fadeUp: "animate-fade-up",
+  scale: "animate-scale-in",
+  slideLeft: "animate-slide-left",
+  slideRight: "animate-slide-right",
+  stagger: "animate-fade-in", // handled by stagger container
 } as const;
 
 type AnimationVariant = keyof typeof variantMap;
 
-interface AnimatedContainerProps extends HTMLMotionProps<"div"> {
+interface AnimatedContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: AnimationVariant;
-  delay?: number;
+  delay?: number; // Delay in seconds (e.g. 0.15)
   once?: boolean;
-  className?: string;
-  children: React.ReactNode;
 }
 
-const AnimatedContainer = forwardRef<HTMLDivElement, AnimatedContainerProps>(
-  (
-    { variant = "fadeUp", delay = 0, once = true, className, children, ...rest },
-    ref
-  ) => {
-    const variants = variantMap[variant];
+export default function AnimatedContainer({
+  variant = "fadeUp",
+  delay = 0,
+  once = true,
+  className,
+  children,
+  ...rest
+}: AnimatedContainerProps) {
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-    const adjustedVariants: Variants =
-      delay > 0
-        ? {
-          hidden: variants.hidden,
-          visible: {
-            ...(variants.visible as object),
-            transition: {
-              ...((variants.visible as { transition?: object }).transition ?? {}),
-              delay,
-            },
-          },
+  useEffect(() => {
+    const currentRef = ref.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          if (once && currentRef) {
+            observer.unobserve(currentRef);
+          }
+        } else if (!once) {
+          setIsInView(false);
         }
-        : variants;
-
-    return (
-      <motion.div
-        ref={ref}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once, margin: "-80px" }}
-        variants={adjustedVariants}
-        className={className}
-        {...rest}
-      >
-        {children}
-      </motion.div>
+      },
+      { rootMargin: "-50px 0px" }
     );
-  }
-);
 
-AnimatedContainer.displayName = "AnimatedContainer";
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
 
-export default AnimatedContainer;
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [once]);
+
+  const animationClass = variantMap[variant];
+  // Convert delay to milliseconds string to match our utilities or just use style
+  const delayStyle = delay > 0 ? { animationDelay: `${delay}s` } : {};
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "opacity-0-init", // hide initially before animation
+        isInView ? animationClass : "",
+        className
+      )}
+      style={delayStyle}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+}
 
 /* Stagger children wrapper */
 export function StaggerContainer({
@@ -120,25 +88,42 @@ export function StaggerContainer({
   delay?: number;
   once?: boolean;
 }) {
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const currentRef = ref.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          if (once && currentRef) observer.unobserve(currentRef);
+        } else if (!once) {
+          setIsInView(false);
+        }
+      },
+      { rootMargin: "-40px 0px" }
+    );
+
+    if (currentRef) observer.observe(currentRef);
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, [once]);
+
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: "-60px" }}
-      variants={{
-        hidden: { opacity: 0 },
-        visible: {
-          opacity: 1,
-          transition: {
-            staggerChildren: 0.07,
-            delayChildren: delay,
-          },
-        },
-      }}
-      className={className}
+    <div
+      ref={ref}
+      className={cn(
+        className,
+        isInView ? "stagger-active" : "opacity-0-init"
+      )}
+      style={delay > 0 ? { animationDelay: `${delay}s` } : {}}
+      data-inview={isInView}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -150,18 +135,17 @@ export function StaggerItem({
   className?: string;
 }) {
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-        },
+    <div
+      className={cn(
+        "transition-all duration-500",
+        className
+      )}
+      style={{
+        opacity: "var(--stagger-opacity, 0)",
+        transform: "var(--stagger-transform, translateY(20px))",
       }}
-      className={className}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

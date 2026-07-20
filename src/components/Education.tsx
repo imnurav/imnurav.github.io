@@ -1,9 +1,8 @@
-"use client";
+
 import { GraduationCap, Calendar, MapPin, Award, CheckCircle2 } from "lucide-react";
 import AnimatedContainer from "./AnimatedContainer";
 import SectionHeading from "./SectionHeading";
 import { educationData } from "@/lib/data";
-import { motion } from "framer-motion";
 
 export default function Education() {
   return (
@@ -22,35 +21,30 @@ export default function Education() {
           align="center"
         />
 
-        <div className="relative">
+        <div className="relative ml-2 sm:ml-7">
           {/* Timeline line */}
-          <div className="absolute left-6 sm:left-8 top-8 bottom-8 w-px bg-gradient-to-b from-violet-500/50 via-emerald-500/30 to-transparent hidden sm:block" />
+          <div className="absolute left-[7px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent" />
 
           <div className="space-y-6">
             {educationData.map((edu, i) => (
               <AnimatedContainer key={i} variant="slideLeft" delay={i * 0.1}>
-                <div className="relative sm:pl-20">
+                <div className="relative pl-8">
                   {/* Timeline dot */}
-                  <div className="hidden sm:flex absolute left-[26px] top-8 w-5 h-5 rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 border-2 border-background shadow-lg items-center justify-center">
+                  <div className="absolute flex left-[8px] -translate-x-1/2 top-8 w-5 h-5 rounded-full bg-gradient-to-br from-primary to-violet-600 border-2 border-background shadow-lg items-center justify-center z-10">
                     <div className="w-1.5 h-1.5 rounded-full bg-white" />
                   </div>
 
-                  <motion.div
-                    whileHover={{ y: -4 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="relative p-7 sm:p-8 rounded-3xl border border-border bg-card hover:bg-secondary/20 transition-all duration-200 group overflow-hidden shadow-card hover:shadow-card-hover"
+                  <div
+                    className="relative p-7 sm:p-8 rounded-3xl border border-border bg-card hover:bg-secondary/20 transition-all duration-300 group overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-1"
                   >
-                    {/* Top accent bar */}
-                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-600 via-indigo-600 to-emerald-600 opacity-60 group-hover:opacity-100 transition-opacity" />
-
                     {/* Background glow */}
-                    <div className="absolute inset-0 bg-violet-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-zinc-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     <div className="relative">
                       {/* Header */}
                       <div className="flex flex-wrap items-start gap-4 mb-6">
-                        <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center shadow-card">
-                          <GraduationCap size={24} className="text-violet-500" />
+                        <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-zinc-500/10 border border-zinc-500/20 flex items-center justify-center shadow-card">
+                          <GraduationCap size={24} className="text-zinc-500" />
                         </div>
 
                         <div className="flex-1 min-w-0">
@@ -58,7 +52,7 @@ export default function Education() {
                             {edu.degree}
                           </h3>
                           <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
-                            <span className="text-sm font-semibold text-violet-500">
+                            <span className="text-sm font-semibold text-zinc-500">
                               {edu.institution}
                             </span>
                           </div>
@@ -86,24 +80,20 @@ export default function Education() {
                       {/* Highlights */}
                       <ul className="space-y-2.5">
                         {edu.highlights.map((highlight, hi) => (
-                          <motion.li
+                          <li
                             key={hi}
-                            initial={{ opacity: 0, x: -8 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: hi * 0.08 }}
                             className="flex items-start gap-3 text-sm text-muted-foreground"
                           >
                             <CheckCircle2
                               size={14}
-                              className="mt-0.5 flex-shrink-0 text-violet-500"
+                              className="mt-0.5 flex-shrink-0 text-zinc-500"
                             />
                             {highlight}
-                          </motion.li>
+                          </li>
                         ))}
                       </ul>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               </AnimatedContainer>
             ))}

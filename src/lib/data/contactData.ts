@@ -8,5 +8,5 @@ export const contactData = {
   phone: SITE_PHONE,
   linkedin: LINKEDIN_URL,
   github: GITHUB_URL,
-  resume: "/resume.pdf",
+  resume: "https://drive.google.com/file/d/1zqNo17lUaZuwn4SYSotXZfTRzVJZtpA3/view?usp=sharing",
 };

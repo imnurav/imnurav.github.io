@@ -1,5 +1,4 @@
-"use client";
-import { motion } from "framer-motion";
+
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
@@ -20,13 +19,9 @@ export default function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    <div
       className={cn(
-        "flex flex-col gap-4 mb-16",
+        "flex flex-col gap-4 mb-16 opacity-0-init animate-fade-up",
         align === "center" && "items-center text-center",
         align === "left" && "items-start text-left",
         className
@@ -34,11 +29,11 @@ export default function SectionHeading({
     >
       {label && (
         <div className="inline-flex items-center gap-2">
-          <div className="h-px w-6 bg-violet-500" />
-          <span className="text-xs font-semibold tracking-widest uppercase text-violet-500">
+          <div className="h-px w-6 bg-primary" />
+          <span className="text-xs font-semibold tracking-widest uppercase text-zinc-500">
             {label}
           </span>
-          <div className="h-px w-6 bg-violet-500" />
+          <div className="h-px w-6 bg-primary" />
         </div>
       )}
 
@@ -57,6 +52,6 @@ export default function SectionHeading({
           {description}
         </p>
       )}
-    </motion.div>
+    </div>
   );
 }

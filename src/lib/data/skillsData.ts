@@ -19,11 +19,11 @@ export const skillsData = [
   {
     category: "DevOps",
     color: "amber",
-    items: ["AWS", "Docker", "GitHub Actions"],
+    items: ["AWS", "DigitalOcean", "Docker", "GitHub Actions"],
   },
   {
-    category: "Mobile & Other",
+    category: "Tools & Other",
     color: "rose",
-    items: ["React Native", "Socket.io", "Git"],
+    items: ["Postman", "Socket.io", "Git", "Linux", "Nginx"],
   },
 ] satisfies SkillCategory[];

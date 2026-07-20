@@ -1,31 +1,27 @@
 export const aboutData = {
-  summary: `I'm a passionate Full Stack Software Engineer who loves building elegant, 
-  performant systems that solve real-world problems. I specialize in backend engineering 
-  with Node.js & NestJS while also delivering polished frontend experiences with Next.js 
-  and React Native. I thrive at the intersection of clean architecture and developer 
-  experience — crafting APIs that scale and interfaces that delight. When I'm not shipping 
-  features, I'm exploring new technologies, contributing to open source, or optimizing 
-  existing systems for peak performance.`,
+  summary: `I am a results-driven Full Stack Engineer who architects high-performance, scalable systems to solve complex business problems. With deep expertise in backend engineering (Node.js & NestJS) and a sharp eye for frontend experiences (Next.js & React), I build resilient applications capable of handling massive traffic at scale.
+
+Whether I'm engineering high-throughput order processing queues or slashing API response times, my focus is always on delivering measurable impact and clean architecture. When I step away from the keyboard, I bring that same drive and strategic mindset to the cricket pitch—always looking to learn, adapt, and push my limits.`,
   highlights: [
     {
       value: "3+",
       label: "Years Experience",
-      description: "Building production-grade systems",
+      description: "Building production-grade applications",
     },
     {
-      value: "1000+",
-      label: "Concurrent Jobs",
-      description: "Processed via distributed queues",
+      value: "100%",
+      label: "Self-Taught",
+      description: "Driven by curiosity & continuous learning",
     },
     {
-      value: "40%",
-      label: "API Improvement",
-      description: "Performance boost via optimization",
+      value: "E2E",
+      label: "System Ownership",
+      description: "From database design to frontend polish",
     },
     {
-      value: "40%",
-      label: "SEO Growth",
-      description: "Organic traffic via SSR strategies",
+      value: "∞",
+      label: "Scalable Mindset",
+      description: "Architecting for high traffic and performance",
     },
   ],
 };

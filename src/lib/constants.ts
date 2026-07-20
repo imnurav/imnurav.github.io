@@ -1,7 +1,7 @@
 import { Mail, Phone, Code2, Layers, Server } from "lucide-react";
 import { GithubIcon, LinkedinIcon, NpmIcon, WhatsappIcon } from "@/components/Icons";
 
-export const SITE_URL = "https://varunkumar.dev";
+export const SITE_URL = "https://imnurav.github.io";
 export const SITE_NAME = "Varun Kumar — Software Engineer";
 export const SITE_DESCRIPTION =
   "Full Stack Software Engineer with 3+ years of experience building scalable production applications using NestJS, Next.js, TypeScript and AWS.";

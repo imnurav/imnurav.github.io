@@ -4,7 +4,7 @@ import { GithubIcon, LinkedinIcon, NpmIcon, WhatsappIcon } from "@/components/Ic
 export const SITE_URL = "https://varunkumar.dev";
 export const SITE_NAME = "Varun Kumar — Software Engineer";
 export const SITE_DESCRIPTION =
-  "Full Stack Software Engineer with 3+ years of experience building scalable production applications using NestJS, Next.js, React Native, TypeScript and AWS.";
+  "Full Stack Software Engineer with 3+ years of experience building scalable production applications using NestJS, Next.js, TypeScript and AWS.";
 export const SITE_AUTHOR = "Varun Kumar";
 export const SITE_EMAIL = "kumarvarun9811@gmail.com";
 export const SITE_PHONE = "+91-9873538514";

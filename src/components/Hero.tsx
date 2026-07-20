@@ -15,16 +15,23 @@ export default function Hero() {
       aria-label="Hero section"
     >
       {/* Animated gradient background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-linear-to-br from-background via-background to-background" />
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-background" />
 
-        {/* Minimalist Background Pattern */}
-        <div
-          className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.06]"
-          style={{ backgroundImage: "radial-gradient(currentColor 1px, transparent 1px)", backgroundSize: "32px 32px" }}
+        {/* Premium Fading Grid */}
+        <div 
+          className="absolute inset-0 z-0 opacity-[0.04] dark:opacity-[0.06]"
+          style={{
+            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+            backgroundSize: `4rem 4rem`,
+            maskImage: `radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent)`,
+            WebkitMaskImage: `radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent)`
+          }}
         />
 
-        {/* Subtle Accent Shapes (Removed per user request) */}
+        {/* Ambient Glow Blobs */}
+        <div className="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] mix-blend-normal animate-pulse-slow opacity-60 dark:opacity-40" />
+        <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[600px] bg-violet-600/20 rounded-full blur-[130px] mix-blend-normal animate-pulse-slow opacity-60 dark:opacity-40" style={{ animationDelay: "2s" }} />
       </div>
 
       {/* Floating icons (using standard CSS float) */}

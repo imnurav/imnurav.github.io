@@ -23,7 +23,7 @@ export default function Education() {
 
         <div className="relative ml-2 sm:ml-7">
           {/* Timeline line */}
-          <div className="absolute left-[7px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent" />
+          <div className="absolute left-[7px] top-4 bottom-4 w-0 border-l-2 border-dashed border-primary/40" />
 
           <div className="space-y-6">
             {educationData.map((edu, i) => (
@@ -82,11 +82,11 @@ export default function Education() {
                         {edu.highlights.map((highlight, hi) => (
                           <li
                             key={hi}
-                            className="flex items-start gap-3 text-sm text-muted-foreground"
+                            className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed"
                           >
                             <CheckCircle2
                               size={14}
-                              className="mt-0.5 flex-shrink-0 text-zinc-500"
+                              className="mt-1 flex-shrink-0 text-zinc-500"
                             />
                             {highlight}
                           </li>

@@ -98,8 +98,8 @@ export default function Navbar({ onCommandOpen }: NavbarProps) {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 opacity-0-init animate-fade-in",
           isScrolled
-            ? "py-3 bg-background border-b border-border/80 shadow-sm"
-            : "py-5"
+            ? "py-3 bg-background/85 backdrop-blur-md border-b border-border/80 shadow-sm"
+            : "py-5 bg-transparent"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

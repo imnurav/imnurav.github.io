@@ -1,5 +1,5 @@
 "use client";
-import { GITHUB_URL, LINKEDIN_URL, SITE_EMAIL } from "@/lib/constants";
+import { GITHUB_URL, LINKEDIN_URL, RESUME_URL, SITE_EMAIL } from "@/lib/constants";
 import { useEffect, useState, useCallback } from "react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import { useTheme } from "next-themes";
@@ -149,7 +149,7 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
       description: "Get a copy of my resume",
       icon: <Download size={16} />,
       action: () => {
-        window.open("/resume.pdf", "_blank");
+        window.open(RESUME_URL, "_blank");
         onClose();
       },
       group: "Actions",

@@ -1,4 +1,4 @@
-import { GITHUB_URL, LINKEDIN_URL, SITE_EMAIL } from "../constants";
+import { GITHUB_URL, LINKEDIN_URL, RESUME_URL, SITE_EMAIL } from "../constants";
 
 export const heroData = {
   greeting: "Hello, I'm",
@@ -6,13 +6,13 @@ export const heroData = {
   title: "Software Engineer",
   subtitle: "Backend / Full Stack",
   description:
-    "Full Stack Software Engineer with 3+ years of experience building scalable production applications using NestJS, Next.js, TypeScript and AWS.",
+    "Backend-focused Full Stack Software Engineer with 3+ years of experience architecting scalable backend platforms, microservices, and high-concurrency applications using Node.js, NestJS, TypeScript, Redis, and Next.js.",
   status: "Open to Opportunities",
   location: "New Delhi, India",
-  resumeUrl: "https://drive.google.com/file/d/1zqNo17lUaZuwn4SYSotXZfTRzVJZtpA3/view?usp=sharing",
+  resumeUrl: RESUME_URL,
   cta: {
     primary: { label: "View Projects", href: "#projects" },
-    secondary: { label: "View Resume", href: "https://drive.google.com/file/d/1zqNo17lUaZuwn4SYSotXZfTRzVJZtpA3/view?usp=sharing" },
+    secondary: { label: "View Resume", href: RESUME_URL },
   },
   socials: [
     { label: "GitHub", href: GITHUB_URL, icon: "github" },

@@ -99,7 +99,7 @@ export default function Hero() {
 
             {/* Description */}
             <p
-              className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl opacity-0-init animate-fade-up delay-400"
+              className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl opacity-0-init animate-fade-up delay-400 text-justify"
             >
               {heroData.description}
             </p>

@@ -1,4 +1,4 @@
-import { GITHUB_URL, LINKEDIN_URL, SITE_EMAIL, SITE_PHONE } from "../constants";
+import { GITHUB_URL, LINKEDIN_URL, RESUME_URL, SITE_EMAIL, SITE_PHONE } from "../constants";
 
 export const contactData = {
   heading: "Let's Build Something Amazing Together",
@@ -8,5 +8,5 @@ export const contactData = {
   phone: SITE_PHONE,
   linkedin: LINKEDIN_URL,
   github: GITHUB_URL,
-  resume: "https://drive.google.com/file/d/1zqNo17lUaZuwn4SYSotXZfTRzVJZtpA3/view?usp=sharing",
+  resume: RESUME_URL,
 };

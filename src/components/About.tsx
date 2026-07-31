@@ -61,7 +61,7 @@ export default function About() {
                 {aboutData.summary.split("\n").map((para, i) => (
                   <p
                     key={i}
-                    className="text-muted-foreground text-base sm:text-lg leading-relaxed"
+                    className="text-muted-foreground text-base sm:text-lg leading-relaxed text-justify"
                   >
                     {para.trim()}
                   </p>

@@ -4,13 +4,15 @@ import { GithubIcon, LinkedinIcon, NpmIcon, WhatsappIcon } from "@/components/Ic
 export const SITE_URL = "https://imnurav.github.io";
 export const SITE_NAME = "Varun Kumar — Software Engineer";
 export const SITE_DESCRIPTION =
-  "Full Stack Software Engineer with 3+ years of experience building scalable production applications using NestJS, Next.js, TypeScript and AWS.";
+  "Backend-focused Full Stack Software Engineer with 3+ years of experience architecting scalable backend platforms, microservices, and high-concurrency applications using Node.js, NestJS, TypeScript, Redis, and Next.js.";
 export const SITE_AUTHOR = "Varun Kumar";
 export const SITE_EMAIL = "kumarvarun9811@gmail.com";
 export const SITE_PHONE = "+91-9873538514";
 
 export const GITHUB_URL = "https://github.com/imnurav";
 export const LINKEDIN_URL = "https://linkedin.com/in/imnurav";
+export const RESUME_URL =
+  "https://drive.google.com/file/d/1pcnw3gyOpSRLA4HMxnGWOu2Cv5SvzXxo/view?usp=sharing";
 
 export const NAV_LINKS = [
   { label: "About", href: "#about" },

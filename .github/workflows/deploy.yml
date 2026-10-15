@@ -38,10 +38,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/lib/data/resume.json
-          git commit -m "chore(resume): update resume url via GitHub Actions dispatch"
+          git commit -m "chore(resume): update resume url via GitHub Actions dispatch [skip ci]"
           git push
       - name: Build with Next.js
         run: yarn build
+      - name: Disable Jekyll
+        run: touch ./out/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

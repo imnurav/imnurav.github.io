@@ -1,9 +1,15 @@
-import { GITHUB_URL, LINKEDIN_URL, RESUME_URL, SITE_EMAIL, SITE_PHONE } from "../constants";
+import {
+  LINKEDIN_URL,
+  GITHUB_URL,
+  RESUME_URL,
+  SITE_EMAIL,
+  SITE_PHONE,
+} from "../constants";
 
 export const contactData = {
-  heading: "Let's Build Something Amazing Together",
+  heading: "Let's Connect",
   subheading:
-    "Whether you have a project in mind, a role to fill, or just want to connect — my inbox is always open.",
+    "Open to discussing backend engineering opportunities, distributed systems, and technical collaborations.",
   email: SITE_EMAIL,
   phone: SITE_PHONE,
   linkedin: LINKEDIN_URL,

@@ -1,9 +1,14 @@
 "use client";
-import { GITHUB_URL, LINKEDIN_URL, RESUME_URL, SITE_EMAIL } from "@/lib/constants";
 import { useEffect, useState, useCallback } from "react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import {
+  LINKEDIN_URL,
+  GITHUB_URL,
+  RESUME_URL,
+  SITE_EMAIL,
+} from "@/lib/constants";
 import {
   GraduationCap,
   ExternalLink,
@@ -39,7 +44,7 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
   const { theme, setTheme } = useTheme();
-  
+
   const [isRendered, setIsRendered] = useState(open);
   const [isVisible, setIsVisible] = useState(open);
 
@@ -82,7 +87,7 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       }, 150);
     },
-    [onClose]
+    [onClose],
   );
 
   const commands: CommandItem[] = [
@@ -144,6 +149,39 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
       group: "Navigation",
     },
     {
+      id: "project-playerkit",
+      label: "PlayerKit — Live Demo",
+      description: "Headless video player & stream security",
+      icon: <ExternalLink size={16} />,
+      action: () => {
+        window.open("https://imnurav.github.io/playerkit/", "_blank");
+        onClose();
+      },
+      group: "Projects",
+    },
+    {
+      id: "project-react-datekit",
+      label: "React DateKit — Live Demo",
+      description: "Zero-dependency React date & time picker",
+      icon: <ExternalLink size={16} />,
+      action: () => {
+        window.open("https://imnurav.github.io/react-datekit/", "_blank");
+        onClose();
+      },
+      group: "Projects",
+    },
+    {
+      id: "project-envguard",
+      label: "EnvGuard — NPM Package",
+      description: "Type-safe environment variable CLI",
+      icon: <ExternalLink size={16} />,
+      action: () => {
+        window.open("https://www.npmjs.com/package/@nurav/envguard", "_blank");
+        onClose();
+      },
+      group: "Projects",
+    },
+    {
       id: "resume",
       label: "Download Resume",
       description: "Get a copy of my resume",
@@ -202,11 +240,11 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
 
   const filtered = query
     ? commands.filter(
-      (c) =>
-        c.label.toLowerCase().includes(query.toLowerCase()) ||
-        c.description?.toLowerCase().includes(query.toLowerCase()) ||
-        c.group.toLowerCase().includes(query.toLowerCase())
-    )
+        (c) =>
+          c.label.toLowerCase().includes(query.toLowerCase()) ||
+          c.description?.toLowerCase().includes(query.toLowerCase()) ||
+          c.group.toLowerCase().includes(query.toLowerCase()),
+      )
     : commands;
 
   const groups = Array.from(new Set(filtered.map((c) => c.group)));
@@ -252,7 +290,7 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
       <div
         className={cn(
           "fixed inset-0 z-[998] bg-background/60 backdrop-blur-md transition-opacity duration-200",
-          isVisible ? "opacity-100" : "opacity-0"
+          isVisible ? "opacity-100" : "opacity-0",
         )}
         onClick={onClose}
       />
@@ -262,7 +300,9 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
         <div
           className={cn(
             "w-full max-w-lg bg-card backdrop-blur-xl border border-border rounded-2xl shadow-card overflow-hidden transition-all duration-200 ease-out pointer-events-auto",
-            isVisible ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-5"
+            isVisible
+              ? "opacity-100 scale-100 translate-y-0"
+              : "opacity-0 scale-95 -translate-y-5",
           )}
           onClick={(e) => e.stopPropagation()}
         >
@@ -322,14 +362,14 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
                             "w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors",
                             isSelected
                               ? "bg-secondary text-foreground"
-                              : "text-foreground hover:bg-secondary/50"
+                              : "text-foreground hover:bg-secondary/50",
                           )}
                         >
                           <div
                             className={cn(
                               "w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-muted-foreground",
                               isSelected &&
-                              "bg-primary/10 text-primary border border-primary/20"
+                                "bg-primary/10 text-primary border border-primary/20",
                             )}
                           >
                             {item.icon}
@@ -361,15 +401,21 @@ export default function CommandMenu({ open, onClose }: CommandMenuProps) {
           {/* Footer */}
           <div className="border-t border-border/40 px-4 py-2.5 flex items-center gap-4 text-[10px] text-muted-foreground/50">
             <span className="flex items-center gap-1">
-              <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">↑↓</kbd>
+              <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">
+                ↑↓
+              </kbd>
               Navigate
             </span>
             <span className="flex items-center gap-1">
-              <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">↵</kbd>
+              <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">
+                ↵
+              </kbd>
               Select
             </span>
             <span className="flex items-center gap-1">
-              <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">Esc</kbd>
+              <kbd className="border border-border/60 rounded px-1 py-0.5 bg-background text-muted-foreground">
+                Esc
+              </kbd>
               Close
             </span>
           </div>

@@ -12,23 +12,23 @@ export type ProjectPackage = {
 export type Project = {
   id: string;
   title: string;
-  tagline: string;
-  description: string;
-  type: string;
-  featured: boolean;
   status: string;
-  links: LinkGroup;
   tech: string[];
-  features?: string[];
-  packages?: ProjectPackage[];
-  color: string;
+  tagline: string;
+  category: string;
+  links: LinkGroup;
+  description: string;
+  featured?: boolean;
+  year?: string;
 };
 
 export type ExperienceRole = {
   title: string;
   type: string;
   period: string;
+  metrics?: string[];
   achievements: string[];
+  tech?: string[];
 };
 
 export type Experience = {

@@ -1,104 +1,136 @@
-
-import { GraduationCap, Calendar, MapPin, Award, CheckCircle2 } from "lucide-react";
-import AnimatedContainer from "./AnimatedContainer";
+import { GraduationCap, Sparkles, Calendar, MapPin, Award } from "lucide-react";
+import { StaggerContainer, StaggerItem } from "./AnimatedContainer";
+import { educationData } from "@/lib/data/educationData";
 import SectionHeading from "./SectionHeading";
-import { educationData } from "@/lib/data";
 
 export default function Education() {
+  if (!educationData || educationData.length === 0) return null;
+
   return (
-    <section id="education" className="section-padding relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[400px] bg-emerald-600/4 blur-[100px] rounded-full" />
+    <section
+      id="education"
+      className="section-padding relative overflow-hidden"
+    >
+      {/* Background ambient lighting */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        {/* Ambient glow blobs */}
+        <div className="absolute top-[20%] right-[15%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none opacity-40 dark:opacity-20" />
+        <div className="absolute bottom-[10%] left-[10%] w-[550px] h-[550px] bg-emerald-600/10 rounded-full blur-[130px] pointer-events-none opacity-30 dark:opacity-20" />
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          label="Education"
-          title="Academic"
-          highlight="Background"
-          description="The foundation that shaped my engineering mindset."
+          label="Education & Learning"
+          title="Academic &"
+          highlight="Continuous Learning"
+          description="Formal computer science foundations paired with hands-on, self-driven systems exploration."
           align="center"
         />
 
-        <div className="relative ml-2 sm:ml-7">
-          {/* Timeline line */}
-          <div className="absolute left-[7px] top-4 bottom-4 w-0 border-l-2 border-dashed border-primary/40" />
+        <StaggerContainer className="grid md:grid-cols-2 gap-6 mt-10">
+          {educationData.map((edu) => {
+            const isFormal = edu.category === "formal";
 
-          <div className="space-y-6">
-            {educationData.map((edu, i) => (
-              <AnimatedContainer key={i} variant="slideLeft" delay={i * 0.1}>
-                <div className="relative pl-8">
-                  {/* Timeline dot */}
-                  <div className="absolute flex left-[8px] -translate-x-1/2 top-8 w-5 h-5 rounded-full bg-gradient-to-br from-primary to-violet-600 border-2 border-background shadow-lg items-center justify-center z-10">
-                    <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                  </div>
+            return (
+              <StaggerItem key={edu.degree}>
+                <div className="relative p-7 sm:p-8 rounded-3xl border border-border bg-card hover:border-primary/40 transition-all duration-300 overflow-hidden group h-full flex flex-col justify-between">
+                  {/* Subtle corner ambient glow on hover */}
+                  <div className="absolute -top-24 -right-24 w-60 h-60 bg-primary/5 blur-[80px] rounded-full pointer-events-none group-hover:bg-primary/10 transition-colors" />
 
-                  <div
-                    className="relative p-7 sm:p-8 rounded-3xl border border-border bg-card hover:bg-secondary/20 transition-all duration-300 group overflow-hidden shadow-card hover:shadow-card-hover hover:-translate-y-1"
-                  >
-                    {/* Background glow */}
-                    <div className="absolute inset-0 bg-zinc-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                    <div className="relative">
-                      {/* Header */}
-                      <div className="flex flex-wrap items-start gap-4 mb-6">
-                        <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-zinc-500/10 border border-zinc-500/20 flex items-center justify-center shadow-card">
-                          <GraduationCap size={24} className="text-zinc-500" />
+                  <div className="relative flex flex-col h-full">
+                    {/* Top Content */}
+                    <div>
+                      {/* Top Row: Icon + Category on Left, Status/Grade Tag on Right */}
+                      <div className="flex items-center justify-between gap-3 mb-5">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105 border ${
+                              isFormal
+                                ? "bg-primary/10 border-primary/20 text-primary"
+                                : "bg-violet-500/10 border-violet-500/20 text-violet-500"
+                            }`}
+                          >
+                            {isFormal ? (
+                              <GraduationCap size={20} />
+                            ) : (
+                              <Sparkles size={18} />
+                            )}
+                          </div>
+                          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            {edu.categoryLabel}
+                          </span>
                         </div>
 
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-xl font-bold leading-snug">
-                            {edu.degree}
-                          </h3>
-                          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
-                            <span className="text-sm font-semibold text-zinc-500">
-                              {edu.institution}
-                            </span>
-                          </div>
-                          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1.5">
-                            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                              <MapPin size={12} />
-                              {edu.location}
-                            </div>
-                            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                              <Calendar size={12} />
-                              {edu.period}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-semibold">
-                          <Award size={12} />
+                        <div
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold shrink-0 border ${
+                            isFormal
+                              ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                              : "bg-violet-500/10 border-violet-500/20 text-violet-600 dark:text-violet-400"
+                          }`}
+                        >
+                          {isFormal ? (
+                            <Award size={13} />
+                          ) : (
+                            <Sparkles size={13} />
+                          )}
                           {edu.grade}
                         </div>
                       </div>
 
-                      {/* Divider */}
-                      <div className="h-px bg-border/50 mb-5" />
+                      {/* Degree & Institution */}
+                      <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground leading-snug">
+                        {edu.degree}
+                      </h3>
+                      <div
+                        className={`text-sm font-semibold mt-1 ${
+                          isFormal ? "text-primary" : "text-violet-500"
+                        }`}
+                      >
+                        {edu.institution}
+                      </div>
 
-                      {/* Highlights */}
-                      <ul className="space-y-2.5">
-                        {edu.highlights.map((highlight, hi) => (
-                          <li
-                            key={hi}
-                            className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed"
-                          >
-                            <CheckCircle2
-                              size={14}
-                              className="mt-1 flex-shrink-0 text-zinc-500"
-                            />
-                            {highlight}
-                          </li>
-                        ))}
-                      </ul>
+                      {/* Location & Period */}
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2.5 text-xs text-muted-foreground">
+                        <span className="inline-flex items-center gap-1.5">
+                          <MapPin size={12} />
+                          {edu.location}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <Calendar size={12} />
+                          {edu.period}
+                        </span>
+                      </div>
+
+                      {/* Narrative Description (Clean & Crisp) */}
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-4 text-justify">
+                        {edu.description}
+                      </p>
                     </div>
+
+                    {/* Coursework / Focus Area Pills */}
+                    {edu.coursework && (
+                      <div className="pt-5 border-t border-border/50 mt-6">
+                        <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block mb-2.5">
+                          {edu.pillTitle}
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {edu.coursework.map((course) => (
+                            <span
+                              key={course}
+                              className="px-2.5 py-1 rounded-md bg-secondary/60 border border-border text-[11px] font-medium text-foreground/80"
+                            >
+                              {course}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              </AnimatedContainer>
-            ))}
-          </div>
-        </div>
+              </StaggerItem>
+            );
+          })}
+        </StaggerContainer>
       </div>
     </section>
   );

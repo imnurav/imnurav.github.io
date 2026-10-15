@@ -42,7 +42,7 @@ export default function AnimatedContainer({
           setIsInView(false);
         }
       },
-      { rootMargin: "-50px 0px" }
+      { rootMargin: "-50px 0px" },
     );
 
     if (currentRef) {
@@ -66,7 +66,7 @@ export default function AnimatedContainer({
       className={cn(
         "opacity-0-init", // hide initially before animation
         isInView ? animationClass : "",
-        className
+        className,
       )}
       style={delayStyle}
       {...rest}
@@ -103,7 +103,7 @@ export function StaggerContainer({
           setIsInView(false);
         }
       },
-      { rootMargin: "-40px 0px" }
+      { rootMargin: "-40px 0px" },
     );
 
     if (currentRef) observer.observe(currentRef);
@@ -115,10 +115,7 @@ export function StaggerContainer({
   return (
     <div
       ref={ref}
-      className={cn(
-        className,
-        isInView ? "stagger-active" : "opacity-0-init"
-      )}
+      className={cn(className, isInView ? "stagger-active" : "opacity-0-init")}
       style={delay > 0 ? { animationDelay: `${delay}s` } : {}}
       data-inview={isInView}
     >
@@ -136,10 +133,7 @@ export function StaggerItem({
 }) {
   return (
     <div
-      className={cn(
-        "transition-all duration-500",
-        className
-      )}
+      className={cn("transition-all duration-500", className)}
       style={{
         opacity: "var(--stagger-opacity, 0)",
         transform: "var(--stagger-transform, translateY(20px))",

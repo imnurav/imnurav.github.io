@@ -3,8 +3,8 @@ import { GITHUB_URL, LINKEDIN_URL, RESUME_URL, SITE_EMAIL } from "../constants";
 export const heroData = {
   greeting: "Hello, I'm",
   name: "Varun Kumar",
-  title: "Software Engineer",
-  subtitle: "Backend / Full Stack",
+  title: "Backend-focused Full Stack Engineer",
+  subtitle: "Distributed Systems • Scalable Architecture",
   description:
     "Backend-focused Full Stack Software Engineer with 3+ years of experience architecting scalable backend platforms, microservices, and high-concurrency applications using Node.js, NestJS, TypeScript, Redis, and Next.js.",
   status: "Open to Opportunities",

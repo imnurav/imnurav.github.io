@@ -9,8 +9,14 @@ export const experienceData = [
         title: "Software Engineer",
         type: "Full-time",
         period: "Apr 2024 – Present",
+        metrics: [
+          "50K+ Users (Bot Sphere)",
+          "40% API Latency Cut",
+          "100K+ Secure Streams",
+          "1K+ Async Jobs",
+        ],
         achievements: [
-          "Re-architected the legacy Laravel CRM into NestJS, implementing scalable order management, courier partner routing across multiple sales channels, webhook-driven status tracking, image processing, and BullMQ-powered asynchronous workflows handling 1K+ concurrent jobs.",
+          "Re-architected the legacy Laravel CRM into NestJS, implementing scalable order management, courier partner routing across multiple sales channels, webhook-driven status tracking, image processing, and BullMQ-powered asynchronous workflows handling 1K+ asynchronous jobs.",
           "Built Bot Sphere, a full-stack customer engagement platform (NestJS, React, Redis Streams, Meta Cloud API) delivering WhatsApp campaign automation, a visual chatbot builder, live agent monitoring, embeddable website widgets, and Redis Lua–based fair agent assignment, serving 50K+ users across the KGS Store ecosystem.",
           "Rebuilt the Khan Global Studies website with a Next.js rebuild (90% SSR), improving SEO rankings by 40% and cutting page load times by 30%.",
           "Owned Course and Test-Series microservices (Node.js, Knex.js, Objection.js), cutting API response times by 40% and securing premium video delivery for 100K+ students via Akamai EdgeAuth.",
@@ -24,7 +30,7 @@ export const experienceData = [
           "Next.js",
           "React",
           "AWS",
-          "Microservices",
+          "PostgreSQL",
           "Akamai",
         ],
       },
@@ -32,10 +38,15 @@ export const experienceData = [
         title: "Junior Software Engineer",
         type: "Full-time",
         period: "Apr 2023 – Mar 2024",
+        metrics: [
+          "1M+ Mobile App Users",
+          "HLS Live Streaming",
+          "iOS & Android",
+        ],
         achievements: [
           "Developed the Khan Global Studies React Native application (Android & iOS), delivering JWT authentication, HLS live streaming, offline downloads, and push notifications for 1M+ students.",
-          "Built core Next.js and React features, including a custom video player supporting HLS, YouTube, and uploaded media, improving the learning experience across web platforms.",
-          "Began developing Course and Test-Series microservices using Minima.js, Knex.js, and Objection.js, progressing to end-to-end ownership as a Software Engineer.",
+          "Built custom web video player components in Next.js/React supporting HLS, YouTube, and uploaded media.",
+          "Contributed to Course and Test-Series microservices using Minima.js, Knex.js, and Objection.js.",
         ],
         tech: [
           "React Native",
@@ -51,8 +62,9 @@ export const experienceData = [
         title: "Software Engineer Intern",
         type: "Internship",
         period: "Jan 2023 – Mar 2023",
+        metrics: ["3 Production Features", "100K+ Students"],
         achievements: [
-          "Delivered 3 production-ready features within the first 3 months using Next.js and React, contributing to a learning platform serving 100K+ students.",
+          "Built and deployed 3 core frontend features using Next.js and React for an educational platform serving 100K+ students.",
         ],
         tech: ["React", "Next.js", "JavaScript"],
       },

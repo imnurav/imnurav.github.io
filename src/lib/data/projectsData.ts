@@ -1,64 +1,82 @@
-export const projectsData = [
+export interface ProjectItem {
+  id: string;
+  title: string;
+  tagline: string;
+  category: string;
+  status: string;
+  description: string;
+  tech: string[];
+  links: {
+    live: string | null;
+    github: string | null;
+    npm: string | null;
+  };
+  featured?: boolean;
+}
+
+export const projectsData: ProjectItem[] = [
   {
     id: "playerkit",
     title: "PlayerKit",
-    tagline: "Comprehensive Video Player Monorepo",
-    description:
-      "A complete suite for building modern video experiences. With native support for HLS, YouTube, and MP4 out of the box, it provides a headless playback engine, ready-to-use React components, and a fully-themed UI library that gives you complete control over the viewing experience.",
-    type: "NPM Monorepo / Open Source",
-    featured: true,
+    tagline: "Headless video player & stream security engine",
+    category: "Open Source",
     status: "Published",
+    featured: true,
+    description:
+      "A modular headless video player monorepo (@playerkit/core, @playerkit/react, @playerkit/ui) unifying HLS, YouTube, and direct video. Built with DevTools anti-tamper detection, dynamic watermarking, and Akamai EdgeAuth token refresh, powering secure playback for 100K+ students.",
+    tech: ["TypeScript", "HLS.js", "Akamai EdgeAuth", "React", "Rollup"],
     links: {
+      live: "https://imnurav.github.io/playerkit/",
       github: "https://github.com/imnurav/playerkit",
       npm: "https://www.npmjs.com/package/@playerkit/core",
-      live: "https://imnurav.github.io/playerkit/",
     },
-    tech: [
-      "TypeScript",
-      "HLS.js",
-      "YouTube API",
-      "MP4",
-      "React",
-      "Rollup",
-      "CSS",
-    ],
-    packages: [
-      {
-        name: "@playerkit/core",
-        desc: "Headless engine managing quality, streams, and player state",
-      },
-      {
-        name: "@playerkit/react",
-        desc: "Drop-in React wrapper with gestures and event bindings",
-      },
-      {
-        name: "@playerkit/ui",
-        desc: "Customizable overlay, controls, and timeline components",
-      },
-    ],
-    color: "emerald",
+  },
+  {
+    id: "botsphere",
+    title: "Bot Sphere",
+    tagline: "WhatsApp automation & customer support platform",
+    category: "Production Platform",
+    status: "Production",
+    featured: true,
+    description:
+      "A full-stack customer engagement platform serving 50K+ users across the KGS ecosystem. Built with NestJS, React, and Meta Cloud API, utilizing Redis Streams for asynchronous message queues and Redis Lua scripts for round-robin agent routing with under 20ms queue latency.",
+    tech: ["NestJS", "React", "Redis Streams", "Meta Cloud API", "MongoDB"],
+    links: {
+      live: null,
+      github: null,
+      npm: null,
+    },
+  },
+  {
+    id: "react-datekit",
+    title: "React DateKit",
+    tagline: "Zero-dependency date & time picker for React",
+    category: "Open Source",
+    status: "Published",
+    featured: true,
+    description:
+      "A lightweight, zero-dependency date and time picker built with native Intl utilities. Features headless state hooks, single/range/datetime selection, auto-stacking responsive layouts, and CSS variable theming with full keyboard navigation and Next.js compatibility.",
+    tech: ["React", "TypeScript", "Next.js", "CSS Tokens", "Rollup"],
+    links: {
+      live: "https://imnurav.github.io/react-datekit/",
+      github: "https://github.com/imnurav/react-datekit",
+      npm: "https://www.npmjs.com/package/react-datekit",
+    },
   },
   {
     id: "envguard",
     title: "EnvGuard",
-    tagline: "Type-Safe Environment Variable Manager",
-    description:
-      "A developer CLI tool that enforces environment variable strictness. It automatically validates your .env files against defined schemas, flags missing variables during CI/CD, and generates strict TypeScript types for zero-runtime errors.",
-    type: "CLI Tool / NPM Package",
-    featured: true,
+    tagline: "Type-safe environment variable manager & CLI",
+    category: "Developer Tools",
     status: "Published",
+    featured: true,
+    description:
+      "A developer CLI tool built with Node.js and Zod that validates .env files against schema definitions and automatically generates type-safe TypeScript declarations, catching missing or invalid variables during CI/CD before production deployment.",
+    tech: ["Node.js", "TypeScript", "Zod", "Commander.js", "NPM"],
     links: {
+      live: null,
       github: "https://github.com/imnurav/envguard",
       npm: "https://www.npmjs.com/package/@nurav/envguard",
-      live: null,
     },
-    tech: ["Node.js", "TypeScript", "Zod", "Commander.js", "NPM"],
-    features: [
-      "Schema-based validation for .env files",
-      "Auto-generates strict TypeScript typings",
-      "CI/CD integration for missing variables detection",
-      "Zero-config setup with sensible defaults",
-    ],
-    color: "violet",
   },
 ];

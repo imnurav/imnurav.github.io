@@ -31,6 +31,11 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen">
+      {/* Ambient subtle background pattern */}
+      <div className="fixed inset-0 pointer-events-none -z-50 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-dots opacity-60 dark:opacity-40" />
+      </div>
+
       <Navbar onCommandOpen={openCommand} />
       <CommandMenu open={commandOpen} onClose={closeCommand} />
 

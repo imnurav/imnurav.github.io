@@ -1,8 +1,55 @@
 "use client";
-import { FOOTER_SOCIALS, SITE_AUTHOR } from "@/lib/constants";
-import { ArrowUp, Terminal } from "lucide-react";
+
+import { ArrowUp, Terminal, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import {
+  LINKEDIN_URL,
+  WHATSAPP_URL,
+  SITE_AUTHOR,
+  GITHUB_URL,
+  SITE_EMAIL,
+  NPM_URL,
+} from "@/lib/constants";
+import {
+  LinkedinIcon,
+  WhatsappIcon,
+  GithubIcon,
+  NpmIcon,
+} from "@/components/Icons";
+
+const FOOTER_SOCIALS = [
+  {
+    label: "GitHub",
+    href: GITHUB_URL,
+    Icon: GithubIcon,
+    hoverClass: "hover:text-foreground",
+  },
+  {
+    label: "LinkedIn",
+    href: LINKEDIN_URL,
+    Icon: LinkedinIcon,
+    hoverClass: "hover:text-[#0A66C2]",
+  },
+  {
+    label: "Email",
+    href: `mailto:${SITE_EMAIL}`,
+    Icon: Mail,
+    hoverClass: "hover:text-red-500",
+  },
+  {
+    label: "npm",
+    href: NPM_URL,
+    Icon: NpmIcon,
+    hoverClass: "hover:text-[#CB3837]",
+  },
+  {
+    label: "WhatsApp",
+    href: WHATSAPP_URL,
+    Icon: WhatsappIcon,
+    hoverClass: "hover:text-[#25D366]",
+  },
+];
 
 export default function Footer() {
   const [showTop, setShowTop] = useState(false);
@@ -27,7 +74,7 @@ export default function Footer() {
             className="flex items-center gap-2 group cursor-pointer"
             onClick={scrollToTop}
           >
-            <div className="w-10 h-10 rounded-xl border border-primary/30 bg-primary/10 flex items-center justify-center shadow-lg shadow-primary/10 transition-all duration-300 group-hover:bg-primary">
+            <div className="w-10 h-10 rounded-xl border border-primary/30 bg-primary/10 flex items-center justify-center transition-all duration-300 group-hover:bg-primary">
               <Terminal
                 size={20}
                 className="text-primary group-hover:text-primary-foreground transition-colors"
@@ -37,27 +84,30 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-xl tracking-tight mb-2">
               {SITE_AUTHOR}
-              {/* <span className="text-primary">.</span> */}
             </h3>
-            <p className="text-base sm:text-lg font-medium text-muted-foreground max-w-md mx-auto leading-relaxed">
-              Software Engineer crafting beautiful, dynamic, and
-              high-performance digital experiences.
+            <p className="text-sm font-medium text-muted-foreground max-w-md mx-auto leading-relaxed">
+              Backend-focused Full Stack Software Engineer architecting scalable
+              backend platforms, microservices, and high-concurrency
+              applications.
             </p>
           </div>
         </div>
 
-        {/* Socials */}
+        {/* Socials with authentic brand hover colors */}
         <div className="flex items-center justify-center gap-4 mb-10">
-          {FOOTER_SOCIALS.map(({ icon: Icon, href, label }) => (
+          {FOOTER_SOCIALS.map(({ Icon, href, label, hoverClass }) => (
             <a
               key={label}
               href={href}
               target={label !== "Email" ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-border/60 bg-secondary/30 text-muted-foreground hover:text-foreground hover:border-border hover:bg-secondary transition-all duration-200"
+              rel={label !== "Email" ? "noopener noreferrer" : undefined}
+              className={cn(
+                "flex items-center justify-center w-10 h-10 rounded-full border border-border/60 bg-secondary/30 text-muted-foreground hover:bg-secondary transition-all duration-200",
+                hoverClass,
+              )}
               aria-label={label}
             >
-              <Icon size={18} className="w-4 h-4" />
+              <Icon size={18} width={16} height={16} className="w-4 h-4" />
             </a>
           ))}
         </div>
@@ -72,46 +122,39 @@ export default function Footer() {
             "Education",
             "Contact",
           ].map((item) => (
-            <button
+            <a
               key={item}
-              onClick={() => {
-                document
-                  .getElementById(item.toLowerCase())
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              href={`#${item.toLowerCase()}`}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               {item}
-            </button>
+            </a>
           ))}
         </div>
 
         {/* Copyright */}
-        <p className="text-xs font-medium text-muted-foreground/50">
-          © {new Date().getFullYear()} {SITE_AUTHOR}. All rights reserved.
-        </p>
+        <div className="text-xs text-muted-foreground flex flex-col sm:flex-row items-center gap-2">
+          <p>© {new Date().getFullYear()} Varun Kumar. All rights reserved.</p>
+          <span className="hidden sm:inline text-muted-foreground/40">•</span>
+          <p className="text-muted-foreground/70">
+            Crafted with Next.js, TypeScript & Tailwind CSS
+          </p>
+        </div>
       </div>
 
-      {/* Back to top */}
-      <div
+      {/* Floating Scroll to Top button */}
+      <button
+        onClick={scrollToTop}
         className={cn(
-          "fixed bottom-6 right-6 z-50 transition-all duration-300 ease-out",
+          "fixed bottom-8 right-8 z-40 p-3 rounded-full bg-primary/10 border border-primary/20 text-primary backdrop-blur-md transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:scale-110 shadow-lg",
           showTop
-            ? "opacity-100 translate-y-0 scale-100"
-            : "opacity-0 translate-y-4 scale-90 pointer-events-none",
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4 pointer-events-none",
         )}
+        aria-label="Scroll to top"
       >
-        <button
-          onClick={scrollToTop}
-          className="w-10 h-10 rounded-xl border border-primary/30 bg-primary/10 text-primary flex items-center justify-center shadow-lg hover:bg-primary hover:text-primary-foreground hover:scale-110 active:scale-90 transition-all duration-300 group"
-          aria-label="Back to top"
-        >
-          <ArrowUp
-            size={18}
-            className="group-hover:-translate-y-1 transition-transform"
-          />
-        </button>
-      </div>
+        <ArrowUp size={18} />
+      </button>
     </footer>
   );
 }

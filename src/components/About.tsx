@@ -1,11 +1,13 @@
-
-import AnimatedContainer, { StaggerContainer, StaggerItem } from "./AnimatedContainer";
-import { User, TrendingUp, Zap, Search } from "lucide-react";
+import { User, Users, Zap, Infinity as InfinityIcon } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { aboutData } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import AnimatedContainer, {
+  StaggerContainer,
+  StaggerItem,
+} from "./AnimatedContainer";
 
-const highlightIcons = [User, TrendingUp, Zap, Search];
+const highlightIcons = [User, Users, Zap, InfinityIcon];
 
 const highlightColors = [
   {
@@ -44,31 +46,30 @@ export default function About() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          label="About Me"
-          title="Architecting"
-          highlight="Scalable Systems"
-          description="A little about who I am, what I do, and what drives me."
+          label={aboutData.heading.label}
+          title={aboutData.heading.title}
+          highlight={aboutData.heading.highlight}
+          description={aboutData.heading.description}
           align="center"
         />
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left — Summary */}
+          {/* Left — Summary & Philosophy */}
           <AnimatedContainer variant="slideLeft" className="space-y-6">
             <div className="relative">
               {/* Decorative line */}
               <div className="absolute -left-4 top-0 bottom-0 w-[2px] bg-gradient-to-b from-violet-500 via-primary to-transparent rounded-full" />
-              <div className="space-y-4 pl-4">
-                {aboutData.summary.split("\n").map((para, i) => (
+              <div className="space-y-5 pl-4">
+                {aboutData.paragraphs.map((para, i) => (
                   <p
                     key={i}
                     className="text-muted-foreground text-base sm:text-lg leading-relaxed text-justify"
                   >
-                    {para.trim()}
+                    {para}
                   </p>
                 ))}
               </div>
             </div>
-
           </AnimatedContainer>
 
           {/* Right — Highlight cards */}
@@ -81,15 +82,15 @@ export default function About() {
                   <div
                     className={cn(
                       "relative flex flex-col gap-3 p-6 rounded-2xl border backdrop-blur-sm overflow-hidden group cursor-default",
-                      "bg-card border-border hover:border-border/80 shadow-card hover:shadow-card-hover",
-                      "hover:-translate-y-1 hover:scale-105 transition-all duration-300"
+                      "bg-card border-border hover:border-primary/40",
+                      "hover:-translate-y-1 transition-all duration-300",
                     )}
                   >
                     {/* Background glow on hover */}
                     <div
                       className={cn(
                         "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-                        color.bg
+                        color.bg,
                       )}
                     />
 
@@ -99,7 +100,7 @@ export default function About() {
                         "relative w-10 h-10 rounded-xl flex items-center justify-center",
                         color.bg,
                         color.border,
-                        "border"
+                        "border",
                       )}
                     >
                       <Icon
@@ -113,7 +114,7 @@ export default function About() {
                       <div
                         className={cn(
                           "text-3xl sm:text-4xl font-bold tracking-tight",
-                          color.text
+                          color.text,
                         )}
                       >
                         {item.value}
@@ -131,7 +132,7 @@ export default function About() {
                       <div
                         className={cn(
                           "w-full h-full rounded-tl-full",
-                          color.bg
+                          color.bg,
                         )}
                       />
                     </div>

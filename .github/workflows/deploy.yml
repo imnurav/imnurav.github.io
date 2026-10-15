@@ -4,9 +4,14 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+    inputs:
+      resume_url:
+        description: "New Resume URL to apply before building (optional)"
+        required: false
+        type: string
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -26,6 +31,15 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Apply dispatch resume URL
+        if: ${{ inputs.resume_url != '' }}
+        run: |
+          node scripts/update-resume.mjs "${{ inputs.resume_url }}" --local-only
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/lib/data/resume.json
+          git commit -m "chore(resume): update resume url via GitHub Actions dispatch"
+          git push
       - name: Build with Next.js
         run: yarn build
       - name: Upload artifact

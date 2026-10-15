@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "resume:update": "node scripts/update-resume.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.24.0",
